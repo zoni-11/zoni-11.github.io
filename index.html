@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="ur">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Watch & Earn - Real Cash Portal</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background-color: #f4f7f6; color: #333; text-align: center; padding-bottom: 50px; direction: rtl; }
+        
+        header { background: linear-gradient(135deg, #ff0000, #cc0000); color: white; padding: 30px 20px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        header h1 { font-size: 2.2rem; margin-bottom: 10px; }
+        header p { font-size: 1.1rem; opacity: 0.9; }
+
+        /* Wallet Dashboard */
+        .wallet-dashboard { background: #1a202c; color: #fff; padding: 15px; margin: 20px auto; max-width: 960px; border-radius: 12px; display: flex; justify-content: space-around; align-items: center; box-shadow: 0 4px 15px rgba(0,0,0,0.15); border: 2px solid #4a5568; }
+        .wallet-item { text-align: center; }
+        .wallet-item span { display: block; font-size: 0.9rem; color: #cbd5e1; margin-bottom: 5px; }
+        .wallet-item strong { font-size: 1.6rem; color: #38a169; }
+        .btn-withdraw { background-color: #3182ce; color: white; border: none; padding: 10px 25px; border-radius: 6px; font-weight: bold; cursor: pointer; transition: background 0.2s; font-size: 1rem; }
+        .btn-withdraw:hover { background-color: #2b6cb0; }
+
+        /* Terms Alert Box */
+        .terms-alert { background-color: #fffaf0; border-right: 5px solid #dd6b20; padding: 15px; margin: 20px auto; max-width: 960px; border-radius: 8px; text-align: right; }
+        .terms-alert h4 { color: #dd6b20; font-size: 1.1rem; margin-bottom: 5px; }
+        .terms-alert p { font-size: 0.95rem; color: #4a5568; line-height: 1.5; }
+
+        .container { max-width: 800px; margin: 0 auto; padding: 0 20px; }
+        
+        /* AdSense Space */
+        .ads-box { background-color: #e2e8f0; border: 2px dashed #cbd5e1; padding: 20px; margin: 20px 0; font-weight: bold; color: #64748b; border-radius: 8px; font-size: 0.9rem; }
+        
+        /* Main Video Player Area */
+        .player-wrapper { background: white; padding: 20px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); margin-top: 20px; }
+        .video-container { position: relative; padding-bottom: 140%; height: 0; overflow: hidden; background: #000; border-radius: 8px; }
+        .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
+        
+        .video-controls { margin-top: 15px; }
+        .btn-earn { display: block; background-color: #e53e3e; color: white; padding: 12px 20px; text-decoration: none; border-radius: 6px; font-weight: bold; border: none; width: 100%; font-size: 1.1rem; cursor: pointer; }
+        .btn-earn:disabled { background-color: #cbd5e1; color: #94a3b8; cursor: not-allowed; }
+
+        .playlist-status { margin-top: 10px; font-size: 0.95rem; color: #4a5568; font-weight: bold; }
+
+        footer { margin-top: 50px; color: #718096; font-size: 0.9rem; direction: ltr; }
+    </style>
+
+    <!-- اپنے گوگل ایڈسینس کا آٹو ایڈز کوڈ یہاں نیچے پیسٹ کریں -->
+    <!-- <script async src="https://googlesyndication.com" crossorigin="anonymous"></script> -->
+</head>
+<body>
+
+    <header>
+        <h1>Watch Videos & Earn Money Online</h1>
+        <p>آٹومیٹک پلے لسٹ: ویڈیوز دیکھیں اور پے پال والٹ میں ڈالرز جمع کریں</p>
+    </header>
+
+    <!-- لائیو والٹ ڈیش بورڈ -->
+    <div class="wallet-dashboard">
+        <div class="wallet-item">
+            <span>آپ کا موجودہ بیلنس</span>
+            <strong>$<span id="user-balance">0.00</span></strong>
+        </div>
+        <div class="wallet-item">
+            <span>دیکھی گئی ویڈیوز</span>
+            <strong><span id="videos-count">0</span> / 1000</strong>
+        </div>
+        <div>
+            <button class="btn-withdraw" onclick="triggerWithdraw()">PayPal Withdraw</button>
+        </div>
+    </div>
+
+    <!-- لازمی شرط کا نوٹس -->
+    <div class="terms-alert">
+        <h4>⚠️ رقم نکلوانے کی لازمی شرائط (Withdrawal Conditions):</h4>
+        <p>1. پے پال (PayPal) کے ذریعے ودڈرا حاصل کرنے کے لیے کم از کم **$100.00** کا بیلنس ہونا لازمی ہے۔<br>
+        2. ہدف پورا کرنے کے لیے صارف کا ٹوٹل **1,000 ویڈیوز** دیکھنا ضروری ہے۔ پہلی 5 ویڈیوز پر فی ویڈیو $0.1 ملے گا، جس کے بعد آٹومیٹک اگلی ویڈیوز چلتی جائیں گی۔</p>
+    </div>
+
+    <div class="container">
+
+        <!-- اوپر والا اشتہار -->
+        <div class="ads-box">
+            Google AdSense Banner Advertisement (Top Ad)
+        </div>
+
+        <!-- مین ویڈیو پلیئر ایریا -->
+        <div class="player-wrapper">
+            <h3 id="video-title">ویڈیو نمبر 1: آن لائن ٹاسک شروع کریں</h3>
+            <br>
+            <div class="video-container">
+                <!-- یہاں YouTube کا پلیئر لائیو ہوگا جو آٹو پلے سنبھالے گا -->
+                <div id="player"></div>
+            </div>
+            
+            <div class="video-controls">
+                <button class="btn-earn" id="claim-btn" onclick="processVideoReward()">ویڈیو مکمل دیکھیں اور $0.1 حاصل کریں</button>
+                <div class="playlist-status" id="playlist-msg">پلے لسٹ کی ترتیب: پہلی 5 ویڈیوز پر بیلنس ایکٹیو ہے۔</div>
+            </div>
+        </div>
+
+        <!-- نیچے والا اشتہار -->
+        <div class="ads-box">
+            Google AdSense Banner Advertisement (Bottom Ad)
+        </div>
+
+        <footer>
+            <p>&copy; 2026 Earn Money Online Portal. All Rights Reserved.</p>
+        </footer>
+
+    </div>
+
+    <!-- یوٹیوب آئی فریم API لوڈ کرنا تاکہ آٹومیٹک پلے ٹریک ہو سکے -->
+    <script src="https://youtube.com"></script>
+
+    <script>
+        // آپ کی ویڈیوز کے لنکس کی لسٹ (پہلی 4 آپ کی اور باقی سیمپل آئی ڈیز ہیں)
+        const videoList = [
+            "4rA2AltWbIY", // ویڈیو 1
+            "t4Gq7xzWKqo", // ویڈیو 2
+            "UtoB8sLjT6Y", // ویڈیو 3
+            "jQNxA6pnlMI", // ویڈیو 4
+            "dQw4w9WgXcQ", // ویڈیو 5 (سیمپل)
+            "9bZkp7q19f0", // ویڈیو 6 (سیمپل اور آگے آٹو پلے)
+            "kJQP7kiw5Fk", 
+            "dQw4w9WgXcQ"
+        ];
+
+        let currentVideoIndex = 0;
+        let currentBalance = 0.0;
+        let watchedCount = 0;
+        let player;
+        let rewardClaimedForCurrent = false;
+
+        // یوٹیوب پلیئر کو اسکرین پر بنانا
+        function onYouTubeIframeAPIReady() {
+            player = new YT.Player('player', {
+                height: '100%',
+                width: '100%',
+                videoId: videoList[currentVideoIndex],
+                events: {
+                    'onStateChange': onPlayerStateChange
+                }
+            });
+        }
+
+        // جب ویڈیو ختم (End) ہوگی تو یہ فنکشن چلے گا
+        function onPlayerStateChange(event) {
+            // YT.PlayerState.ENDED کا مطلب ہے ویڈیو ختم ہو گئی
+            if (event.data == YT.PlayerState.ENDED) {
+                // اگر پہلی 5 ویڈیوز میں سے ہے اور بونس کلیم نہیں کیا تو آٹو کلیم کریں
+                if (currentVideoIndex < 5 && !rewardClaimedForCurrent) {
+                    processVideoReward();
+                }
+                
+                // اگلی ویڈیو پر جائیں
+                moveToNextVideo();
+            }
+        }
+
+        function processVideoReward() {
+            if (!rewardClaimedForCurrent) {
+                if (currentVideoIndex < 5) {
+                    currentBalance += 0.1; // ہر ویڈیو پر 0.1 ڈالر
+                    document.getElementById('user-balance').innerText = currentBalance.toFixed(2);
+                }
+                
+                watchedCount += 1;
+                document.getElementById('videos-count').innerText = watchedCount;
+                
+                rewardClaimedForCurrent = true;
+                document.getElementById('claim-btn').disabled = true;
+                document.getElementById('claim-btn').innerText = "ٹاسک مکمل! اگلی ویڈیو لوڈ ہو رہی ہے...";
+            }
+        }
+
+        function moveToNextVideo() {
+            currentVideoIndex++;
+            
+            // چیک کریں کہ پلے لسٹ میں مزید ویڈیوز ہیں یا نہیں
+            if (currentVideoIndex < videoList.length) {
+                rewardClaimedForCurrent = false;
+                
+                // نیا ویڈیو لوڈ کریں اور آٹو پلے کریں
+                player.loadVideoById(videoList[currentVideoIndex]);
+                
+                // ٹائٹل اپڈیٹ کریں
+                document.getElementById('video-title').innerText = "ویڈیو نمبر " + (currentVideoIndex + 1) + ": آٹومیٹک پلے ٹاسک چل رہا ہے";
+                
+                // بٹن ری سیٹ کریں
+                if (currentVideoIndex < 5) {
+                    document.getElementById('claim-btn').disabled = false;
+                    document.getElementById('claim-btn').innerText = "ویڈیو مکمل دیکھیں اور $0.1 حاصل کریں";
+                } else {
+                    document.getElementById('claim-btn').innerText = "آٹومیٹک پلے موڈ آن ہے (ویڈیوز چلتی رہیں گی)";
+                    document.getElementById('claim-btn').disabled = true;
+                    document.getElementById('playlist-msg').innerText = "بنیادی 5 ٹاسک مکمل! اب پلے لسٹ آٹو چل رہی ہے۔";
+                }
+            } else {
+                document.getElementById('video-title').innerText = "تمام دستیاب ویڈیوز مکمل ہو گئیں!";
+                document.getElementById('claim-btn').innerText = "شکریہ! مزید ٹاسک جلد آئیں گے";
+            }
+        }
+
+        function triggerWithdraw() {
+            if (currentBalance < 100.0) {
+                alert("معذرت! آپ پے پال ودڈرا نہیں لے سکتے۔ رقم نکلوانے کے لیے کم از کم $100.00 کا ہونا لازمی ہے۔ ابھی آپ کا بیلنس ہے: $" + currentBalance.toFixed(2));
+            } else {
+                alert("مبارک ہو! آپ کا $100 کا ہدف پورا ہو گیا ہے۔ اپنا پے پال (PayPal) ای میل درج کریں تاکہ رقم منتقل کی جا سکے!");
+            }
+        }
+    </script>
+
+</body>
+</html>
