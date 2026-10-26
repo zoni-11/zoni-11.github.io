@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+p<!DOCTYPE html>
 <html lang="ur">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Watch & Earn - Real Cash Portal</title>
+    <title>Watch</title>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
         body { background-color: #f4f7f6; color: #333; text-align: center; padding-bottom: 50px; direction: rtl; }
@@ -50,31 +50,25 @@
 <body>
 
     <header>
-        <h1>Watch Videos & Earn Money Online</h1>
-        <p>آٹومیٹک پلے لسٹ: ویڈیوز دیکھیں اور پے پال والٹ میں ڈالرز جمع کریں</p>
+        <h1>Watch Videos </h1>
+        <p>آٹومیٹک پلے لسٹ: ویڈیوز دیکھیں ں</p>
     </header>
 
     <!-- لائیو والٹ ڈیش بورڈ -->
     <div class="wallet-dashboard">
         <div class="wallet-item">
-            <span>آپ کا موجودہ بیلنس</span>
-            <strong>$<span id="user-balance">0.00</span></strong>
+            <spا نس</span>
+            <strong><span id="user-balance">0.00</span></strong>
         </div>
-        <div class="wallet-item">
+        <div class=">
             <span>دیکھی گئی ویڈیوز</span>
             <strong><span id="videos-count">0</span> / 1000</strong>
         </div>
         <div>
-            <button class="btn-withdraw" onclick="triggerWithdraw()">PayPal Withdraw</button>
+            <button class="btn-withdraw" onclick="triggerWithdraw()"></button>
         </div>
     </div>
 
-    <!-- لازمی شرط کا نوٹس -->
-    <div class="terms-alert">
-        <h4>⚠️ رقم نکلوانے کی لازمی شرائط (Withdrawal Conditions):</h4>
-        <p>1. پے پال (PayPal) کے ذریعے ودڈرا حاصل کرنے کے لیے کم از کم **$100.00** کا بیلنس ہونا لازمی ہے۔<br>
-        2. ہدف پورا کرنے کے لیے صارف کا ٹوٹل **1,000 ویڈیوز** دیکھنا ضروری ہے۔ پہلی 5 ویڈیوز پر فی ویڈیو $0.1 ملے گا، جس کے بعد آٹومیٹک اگلی ویڈیوز چلتی جائیں گی۔</p>
-    </div>
 
     <div class="container">
 
@@ -147,7 +141,7 @@
         function onPlayerStateChange(event) {
             // YT.PlayerState.ENDED کا مطلب ہے ویڈیو ختم ہو گئی
             if (event.data == YT.PlayerState.ENDED) {
-                // اگر پہلی 5 ویڈیوز میں سے ہے اور بونس کلیم نہیں کیا تو آٹو کلیم کریں
+                //
                 if (currentVideoIndex < 5 && !rewardClaimedForCurrent) {
                     processVideoReward();
                 }
@@ -189,7 +183,7 @@
                 // بٹن ری سیٹ کریں
                 if (currentVideoIndex < 5) {
                     document.getElementById('claim-btn').disabled = false;
-                    document.getElementById('claim-btn').innerText = "ویڈیو مکمل دیکھیں اور $0.1 حاصل کریں";
+                    document.getElementById('claim-btn').innerText ویڈیو مکمل دیکھیں ں";
                 } else {
                     document.getElementById('claim-btn').innerText = "آٹومیٹک پلے موڈ آن ہے (ویڈیوز چلتی رہیں گی)";
                     document.getElementById('claim-btn').disabled = true;
@@ -201,12 +195,7 @@
             }
         }
 
-        function triggerWithdraw() {
-            if (currentBalance < 100.0) {
-                alert("معذرت! آپ پے پال ودڈرا نہیں لے سکتے۔ رقم نکلوانے کے لیے کم از کم $100.00 کا ہونا لازمی ہے۔ ابھی آپ کا بیلنس ہے: $" + currentBalance.toFixed(2));
-            } else {
-                alert("مبارک ہو! آپ کا $100 کا ہدف پورا ہو گیا ہے۔ اپنا پے پال (PayPal) ای میل درج کریں تاکہ رقم منتقل کی جا سکے!");
-            }
+        function  {
         }
     </script>
 
